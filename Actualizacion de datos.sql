@@ -79,3 +79,7 @@ select nombre,edad, estado_gato, cuidado_requerido,Colaborador,cuidador_temporal
 from gato
 left join persona on gato.id_colaborador=persona.id_colaborador;
 
+
+SELECT nombre, edad
+FROM gato
+ORDER BY edad DESC;
