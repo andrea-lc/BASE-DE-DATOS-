@@ -1,55 +1,79 @@
-use refugio_gatos;
-select *from sys.databases;
-exec sp_help adoptante;
-select*from persona;
-select*from gato;
+-- Seleccionamos la base de datos que vamos a usar
+USE refugio_gatos;
+
+-- Mostrar todas las bases de datos disponibles en el servidor
+SELECT * FROM sys.databases;
+
+-- Ver la estructura (columnas, tipos de datos, etc.) de la tabla adoptante
+EXEC sp_help adoptante;
+
+-- Consultar todos los registros de persona y de gato
+SELECT * FROM persona;
+SELECT * FROM gato;
 
 
-select nombre,edad, estado_gato, cuidado_requerido,Colaborador,cuidador_temporal,adoptante
-from gato
-left join persona on gato.id_colaborador=persona.id_colaborador;
+-- Relacionar gatos con sus cuidadores o adoptantes (JOIN entre tablas)
+SELECT nombre, edad, estado_gato, cuidado_requerido,
+       Colaborador, cuidador_temporal, adoptante
+FROM gato
+LEFT JOIN persona ON gato.id_colaborador = persona.id_colaborador;
 
-EXEC sp_rename 'adoptante.nombre',
-'nombre_adoptante', 'COLUMN';
 
-alter table adoptante 
-add Cuidador_temporal VARCHAR (2),Adoptante varchar (2);
+-- Renombrar columna 'nombre' de la tabla adoptante a 'nombre_adoptante'
+EXEC sp_rename 'adoptante.nombre', 'nombre_adoptante', 'COLUMN';
 
+-- Agregar nuevas columnas a la tabla adoptante
+ALTER TABLE adoptante 
+ADD Cuidador_temporal VARCHAR(2),
+    Adoptante VARCHAR(2);
+
+-- Agregar nuevas columnas a la tabla gato
 ALTER TABLE gato 
 ADD estado_gato VARCHAR(100),
     cuidado_requerido VARCHAR(20);
 
-alter TABLE gato 
-alter column cuidado_requerido varchar(100);
+-- Modificar el tamaño de la columna cuidado_requerido
+ALTER TABLE gato 
+ALTER COLUMN cuidado_requerido VARCHAR(100);
 
-alter table adoptante drop COLUMN Cuidador_temporal,Adoptante; 
+-- Eliminar las columnas añadidas en adoptante
+ALTER TABLE adoptante 
+DROP COLUMN Cuidador_temporal, Adoptante;
 
-update adoptante
-set 
-	Cuidador_temporal='no',
-	Adoptante='si'
-where id_adoptante=2;
 
-update gato
-set 
-	Cuidador_temporal='no',
-	Adoptante='si'
-where id_adoptante=2;
+-- Actualizar registros de la tabla adoptante
+UPDATE adoptante
+SET Cuidador_temporal = 'no',
+    Adoptante = 'si'
+WHERE id_adoptante = 2;
 
-select*from persona;
-select*from gato;
+-- Actualizar registros de la tabla gato (relacionados con adoptante)
+UPDATE gato
+SET Cuidador_temporal = 'no',
+    Adoptante = 'si'
+WHERE id_adoptante = 2;
 
-update gato
-set 
-	estado_gato='sano',
-	cuidado_requerido='ninguno'
-where id_gato=1;
 
+-- Consultas de verificación
+SELECT * FROM persona;
+SELECT * FROM gato;
+
+
+-- Actualizar estado y cuidado requerido de un gato específico
+UPDATE gato
+SET estado_gato = 'sano',
+    cuidado_requerido = 'ninguno'
+WHERE id_gato = 1;
+
+
+-- Renombrar tabla adoptante a persona
 EXEC sp_rename 'adoptante', 'persona';
 
-EXEC sp_rename 'gato.id_adoptante',
-'id_colaborador', 'COLUMN';
+-- Renombrar columna id_adoptante de gato a id_colaborador
+EXEC sp_rename 'gato.id_adoptante', 'id_colaborador', 'COLUMN';
 
+
+-- Insertar nuevos registros en la tabla persona
 INSERT INTO persona (Colaborador, Cuidador_temporal, Adoptante)
 VALUES
 ('María López', 'si', 'no'),      
@@ -58,7 +82,7 @@ VALUES
 ('José Martínez', 'si', 'si');    
 
 
-
+-- Insertar registros de gatos con su estado y necesidades
 INSERT INTO gato (nombre, edad, id_colaborador, estado_gato, cuidado_requerido)
 VALUES
 ('Pelusa', 4, NULL, 'enfermo', 'medicación diaria'),
@@ -70,16 +94,26 @@ VALUES
 ('Max', 2, 1, 'sano', 'vacunación pendiente'),
 ('Luna', 7, NULL, 'enfermo', 'tratamiento contra parásitos');
 
+
+-- Actualizar a una persona como cuidador temporal
 UPDATE persona
 SET Cuidador_temporal = 'si'
 WHERE id_colaborador = 4;
 
 
-select nombre,edad, estado_gato, cuidado_requerido,Colaborador,cuidador_temporal,adoptante
-from gato
-left join persona on gato.id_colaborador=persona.id_colaborador;
+-- Consulta de gatos junto a sus cuidadores/adoptantes
+SELECT nombre, edad, estado_gato, cuidado_requerido,
+       Colaborador, cuidador_temporal, adoptante
+FROM gato
+LEFT JOIN persona ON gato.id_colaborador = persona.id_colaborador;
 
 
+-- Ordenar los gatos por edad (de mayor a menor)
 SELECT nombre, edad
 FROM gato
 ORDER BY edad DESC;
+
+SELECT nombre, edad, estado_gato, cuidado_requerido,
+       Colaborador, cuidador_temporal, adoptante
+FROM gato
+INNER JOIN persona ON gato.id_colaborador = persona.id_colaborador;
