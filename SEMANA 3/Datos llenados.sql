@@ -94,3 +94,29 @@ select*from persona;
 select*from roles;
 select*from usuario;
 select*from veterinaria;
+
+-- Ejemplo Left join
+select nombre, edad,raza,cuidado_requerido,fecha_visita,tratamiento
+from gato
+left join veterinaria on gato.id_gato = veterinaria.id_gato;
+
+-- Ejemplo Inner join
+select nombre, edad,raza,cuidado_requerido,fecha_visita,tratamiento
+from gato
+inner join veterinaria on gato.id_gato = veterinaria.id_gato;
+
+-- ADOPCIONES  
+SELECT gato.nombre, fecha_adopcion,persona.nombre
+from gato 
+left join adopcion on gato.id_gato = adopcion.id_gato
+left join persona on adopcion.id_adoptante = persona.id_persona;
+
+-- Gatos con cuidador temporal
+select gato.nombre , estado_gato,persona.nombre
+from gato
+inner join cuidado on gato.id_gato = cuidado.id_cuidador
+inner join persona on cuidado.id_cuidador = persona.id_persona;
+
+select*from cuidado;
+select*from encargados_refugio;
+
