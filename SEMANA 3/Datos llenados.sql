@@ -51,6 +51,13 @@ insert into gato (nombre, edad, raza, estado_gato, cuidado_requerido) values
 ('garfield', 6, 'persa', 'en refugio', 'dieta baja en grasas'),
 ('kira', 3, 'angora', 'adoptado', 'chequeo regular');
 
+UPDATE Gato
+SET
+estado_gato = NULL
+WHERE id_gato = 9;
+
+SELECT*FROM gato;
+
 -- adopciones (solo algunos gatos)
 insert into adopcion (id_gato, id_adoptante, fecha_adopcion, observaciones) values
 (1, 1, '2025-01-15', 'adoptado rápidamente por ana'),

@@ -28,6 +28,8 @@ inner join roles on persona.id_persona = roles.id_roles
 where persona.nombre like 'p%';
 
 
+
+
 -- In para buscar gatos con una edad de 1 o 2 años
 select *from gato
 where edad in (1,2)
@@ -48,3 +50,25 @@ SELECT id_adoptante, COUNT(*) AS adopciones_por_persona
 FROM adopcion
 GROUP BY id_adoptante
 having count(*)>1;
+
+
+--ejemplo con case
+select nombre,
+       estado_gato,
+       CASE estado_gato
+           WHEN 'adoptado' THEN 'Con familia'
+           WHEN NULL THEN 'Busca familia'
+           ELSE 'Estado desconocido'
+       END AS observacion
+FROM gato;
+
+select *from roles;
+
+-- borrar columnas
+alter table roles 
+drop column rol_adoptante;
+
+alter table roles 
+drop column rol_cuidadorzzz;
+
+exec sp_rename '
