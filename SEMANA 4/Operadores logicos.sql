@@ -27,8 +27,7 @@ inner join persona on cuidado.id_cuidador = persona.id_persona
 inner join roles on persona.id_persona = roles.id_roles
 where persona.nombre like 'p%';
 
-
-
+select*from roles;
 
 -- In para buscar gatos con una edad de 1 o 2 años
 select *from gato
@@ -71,4 +70,5 @@ drop column rol_adoptante;
 alter table roles 
 drop column rol_cuidadorzzz;
 
-exec sp_rename '
+
+
