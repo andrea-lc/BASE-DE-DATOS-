@@ -1,0 +1,63 @@
+- Tablas Dimensión (Dim)
+
+DimAccount: Información de cuentas contables (plan de cuentas).
+
+DimCurrency: Monedas utilizadas en transacciones (USD, EUR, etc.).
+
+DimCustomer: Datos de los clientes (nombre, ubicación, género, etc.).
+
+DimDate: Calendario completo (día, mes, trimestre, año, festivos, etc.).
+
+DimDepartmentGroup: Agrupaciones de departamentos de la empresa.
+
+DimEmployee: Información de empleados (nombre, cargo, jefe directo).
+
+DimGeography: Ubicación geográfica (país, ciudad, estado, región).
+
+DimOrganization: Estructura organizacional de la compañía.
+
+DimProduct: Detalles de productos (nombre, código, modelo).
+
+DimProductCategory: Categorías principales de productos (ej. Bicicletas).
+
+DimProductSubcategory: Subcategorías de productos (ej. Montaña, carretera).
+
+DimPromotion: Promociones y campañas de marketing.
+
+DimReseller: Información de distribuidores (resellers).
+
+DimSalesReason: Motivos de compra (ej. precio, calidad, recomendación).
+
+DimSalesTerritory: Regiones de ventas (ej. Norteamérica, Europa).
+
+DimScenario: Escenarios de planificación (ej. presupuesto, forecast).
+
+- Tablas de Hechos (Fact)
+
+FactAdditionalInternationalProductDescription: Descripciones de productos adicionales en varios idiomas.
+
+FactCallCenter: Datos de llamadas al centro de atención (duración, satisfacción).
+
+FactCurrencyRate: Tasas de cambio de monedas por fecha.
+
+FactFinance: Información financiera consolidada.
+
+FactInternetSales: Ventas realizadas a través de Internet.
+
+FactInternetSalesReason: Relación entre ventas por internet y motivos de compra.
+
+FactProductInventory: Inventario de productos por fecha y almacén.
+
+FactResellerSales: Ventas a través de distribuidores (resellers).
+
+FactSalesQuota: Metas de ventas asignadas a vendedores o regiones.
+
+FactSurveyResponse: Respuestas de encuestas a clientes.
+
+- Otras tablas
+
+DatabaseLog: Registro de cambios en la base de datos.
+
+NewFactCurrencyRate: Versión de prueba o extendida de tasas de cambio.
+
+ProspectiveBuyer: Posibles clientes interesados (leads).

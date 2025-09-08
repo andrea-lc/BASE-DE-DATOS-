@@ -1,0 +1,65 @@
+rate_code → Código de tarifa aplicada:
+
+1 = Tarifa estándar (dentro de NYC)
+
+2 = JFK (tarifa fija al aeropuerto)
+
+3 = Newark (tarifa especial)
+
+4 = Nassau/Westchester
+
+5 = tarifa negociada
+
+6 = paseo grupal.
+
+store_and_fwd_flag → Indica si los datos se enviaron en tiempo real o almacenados para enviarse luego (Y = yes, N = no).
+
+pickup_datetime → Fecha y hora en que empezó el viaje.
+
+dropoff_datetime → Fecha y hora en que terminó el viaje.
+
+passenger_count → Número de pasajeros declarados en el viaje.
+
+trip_time_in_secs → Duración total del viaje en segundos.
+
+trip_distance → Distancia recorrida (en millas).
+
+📌 Geolocalización
+
+pickup_longitude / pickup_latitude → Coordenadas donde inició el viaje.
+
+dropoff_longitude / dropoff_latitude → Coordenadas donde terminó el viaje.
+
+📌 Pagos y tarifas
+
+payment_type → Tipo de pago:
+
+1 = Efectivo
+
+2 = Tarjeta de crédito
+
+3 = No pagado
+
+4 = Disputa
+
+5 = Desconocido
+
+6 = Anulación.
+
+fare_amount → Costo base del viaje (antes de impuestos y extras).
+
+surcharge → Recargo (ej. por hora pico o condiciones especiales).
+
+mta_tax → Impuesto regulado por la MTA (Metropolitan Transportation Authority).
+
+tolls_amount → Total de peajes pagados en el viaje.
+
+total_amount → Suma total pagada (incluye tarifa base + impuestos + peajes + propina).
+
+tip_amount → Propina pagada (si el método de pago fue tarjeta, en efectivo no siempre se registra).
+
+📌 Propina (datos derivados)
+
+tipped → Indicador (1 = sí dejó propina, 0 = no dejó propina).
+
+tip_class → Categoría de la propina (ej. baja, media, alta, según reglas definidas por quien procesó el dataset).
