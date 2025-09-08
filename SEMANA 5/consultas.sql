@@ -1,0 +1,43 @@
+use AdventureWorksDW2022;
+
+select * from DimPromotion;
+select * from DimCurrency;
+select * from FactInternetSales;
+select * from DimProduct;
+select * from DimCustomer;
+select * from DimGeography;
+select * from DimSalesTerritory;
+select * from DimDate;
+
+-- Pedidos por Internet ordenador por llame primaria de los productos 
+select p.EnglishProductName as Product, f.OrderQuantity, f.TotalProductCost, c.FirstName AS Customer, c.LastName,
+       c.EmailAddress, c.AddressLine1, f.OrderDate, f.ShipDate, g.City, g.StateProvinceName,g. EnglishCountryRegionName as Country
+from DimProduct p
+left join FactInternetSales f on p.ProductKey= f.ProductKey
+left join DimCustomer c on f.CustomerKey = c.CustomerKey
+left join DimGeography g on c.GeographyKey= g.GeographyKey
+Order by f.ProductKey asc;
+
+-- Cantidad de productos pedidos
+select p.EnglishProductName as Product, count (*) as InternetSalesTotal
+from DimProduct p
+INNER join FactInternetSales f on p.ProductKey= f.ProductKey
+Group by p.EnglishProductName
+having count (*) >1000;
+
+
+
+
+
+-- Pedidos del producto Touring-3000 Blue, 54
+select p.EnglishProductName as Product, f.OrderQuantity, f.TotalProductCost, c.FirstName AS Customer, c.LastName,
+       c.EmailAddress, c.AddressLine1, f.OrderDate, f.ShipDate, g.City, g.StateProvinceName,g. EnglishCountryRegionName as Country
+from DimProduct p 
+left join FactInternetSales f on p.ProductKey= f.ProductKey
+left join DimCustomer c on f.CustomerKey = c.CustomerKey
+left join DimGeography g on c.GeographyKey= g.GeographyKey
+where p.EnglishProductName like '%Touring-3000 Blue, 54%'
+Order by f.ProductKey asc;
+
+
+
