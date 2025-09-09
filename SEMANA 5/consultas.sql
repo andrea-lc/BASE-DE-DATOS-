@@ -3,7 +3,7 @@ use AdventureWorksDW2022;
 select * from DimPromotion;
 select * from DimCurrency;
 select * from FactInternetSales;
-select * from DimProduct;
+select EnglishProductName, StandardCost from DimProduct;
 select * from DimCustomer;
 select * from DimGeography;
 select * from DimSalesTerritory;
@@ -40,4 +40,14 @@ where p.EnglishProductName like '%Touring-3000 Blue, 54%'
 Order by f.ProductKey asc;
 
 
+select EnglishProductName, StandardCost from DimProduct;
 
+select p.EnglishProductName as Product, p.StandardCost,
+  CASE
+         WHEN p.StandardCost > 1000 THEN 'TRUE'
+         WHEN p.StandardCost <= 1000 THEN 'FALSE'
+         ELSE 'UNKNOWN'
+  END AS Resultado
+from DimProduct p
+INNER join FactInternetSales f on p.ProductKey= f.ProductKey
+where p.ProductKey IN (5);
