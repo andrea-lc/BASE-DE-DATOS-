@@ -45,9 +45,8 @@ select EnglishProductName, StandardCost from DimProduct;
 select p.EnglishProductName as Product, p.StandardCost,
   CASE
          WHEN p.StandardCost > 1000 THEN 'TRUE'
-         WHEN p.StandardCost <= 1000 THEN 'FALSE'
-         ELSE 'UNKNOWN'
+         WHEN p.StandardCost IS NULL THEN 'UNKNOWN'
   END AS Resultado
 from DimProduct p
-INNER join FactInternetSales f on p.ProductKey= f.ProductKey
+INNER join FactInternetSales f on p.ProductKey= f.ProductKey;
 where p.ProductKey IN (5);
