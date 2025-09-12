@@ -2,7 +2,7 @@ use AdventureWorksDW2022;
 
 select * from DimPromotion;
 select * from DimCurrency;
-select * from FactInternetSales;
+select TotalProductCost from FactInternetSales where TotalProductCost is null;
 select EnglishProductName, StandardCost from DimProduct;
 select * from DimCustomer;
 select * from DimGeography;
@@ -42,11 +42,10 @@ Order by f.ProductKey asc;
 
 select EnglishProductName, StandardCost from DimProduct;
 
-select p.EnglishProductName as Product, p.StandardCost,
-  CASE
-         WHEN p.StandardCost > 1000 THEN 'TRUE'
-         WHEN p.StandardCost IS NULL THEN 'UNKNOWN'
-  END AS Resultado
+
+-- Si se hace alguna operacion con null, el resultado siempre sera null, resultado: unknown
+select p.EnglishProductName as Product, p.StandardCost
 from DimProduct p
-INNER join FactInternetSales f on p.ProductKey= f.ProductKey;
-where p.ProductKey IN (5);
+left join FactInternetSales f on p.ProductKey= f.ProductKey
+where p.StandardCost>1000 and p.StandardCost IS NULL; 
+-- en este caso todo aparecera vacio ya que un campo no puede ser verdadero y desconocido a la vez 
