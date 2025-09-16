@@ -25,3 +25,10 @@ select p.EnglishProductName, f.UnitCost
 from DimProduct p
 full join FactProductInventory f on p.ProductKey=f.ProductKey
 where f.ProductKey in (select p.ProductKey from DimProduct p where p.EnglishProductName like '%Long%');
+
+-- Devuelve todos los productos, junto con las fechas de movimiento de inventario, Si el producto no tiene movimientos,
+-- o si un movimiento no tiene fecha registrada, los valores relacionados aparecen como NULL.
+select p.EnglishProductName as ProductName, f.MovementDate, d.DayNumberOfWeek,d.DayNumberOfMonth,d.DayNumberOfYear
+from DimProduct p
+left join FactProductInventory f on p.ProductKey= f.ProductKey
+left join DimDate d on f.DateKey= d.DateKey;
