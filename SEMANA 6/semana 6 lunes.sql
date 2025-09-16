@@ -7,7 +7,6 @@ select *from DimDate;
 update DimProduct set Status = 'Old'
 where Status is null;
 
-
 --Promedio de precios (747.6617), entonces esta consulta mostrara precios mayores a ese valor 
 select p.EnglishProductName as ProductName, p.ListPrice
 from DimProduct p
