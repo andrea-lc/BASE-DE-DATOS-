@@ -31,3 +31,22 @@ select p.EnglishProductName as ProductName, f.MovementDate, d.DayNumberOfWeek,d.
 from DimProduct p
 left join FactProductInventory f on p.ProductKey= f.ProductKey
 left join DimDate d on f.DateKey= d.DateKey;
+
+select * from FactResellerSales;
+select * from FactInternetSales;
+
+
+--Se usa UNION para conbinar los resultados de las tablas ventas por internet y venta a distrbuidores  
+select EnglishProductName, OrderQuantity, TotalProductCost, OrderDate from FactResellerSales 
+inner join DimProduct on FactResellerSales.ProductKey= DimProduct.ProductKey
+union 
+select EnglishProductName, OrderQuantity, TotalProductCost, OrderDate from FactInternetSales 
+inner join DimProduct on FactInternetSales.ProductKey= DimProduct.ProductKey;
+
+--Se usa UNION ALL para conbinar los resultados de las tablas ventas por internet y venta a distrbuidores  
+-- este mostrara incluso los que se duplican
+select EnglishProductName, OrderQuantity, TotalProductCost, OrderDate from FactResellerSales 
+inner join DimProduct on FactResellerSales.ProductKey= DimProduct.ProductKey
+union all 
+select EnglishProductName, OrderQuantity, TotalProductCost, OrderDate from FactInternetSales 
+inner join DimProduct on FactInternetSales.ProductKey= DimProduct.ProductKey;
