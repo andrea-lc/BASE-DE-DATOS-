@@ -15,7 +15,7 @@ set ProductCategoryAlternateKey= 5
 where ProductCategoryKey= 5;
 
 -- Elimina la fila que tenga como id 5 
-delete from DimProductCategory  where ProductCategoryKey= 13;
+delete from DimProductCategory  where ProductCategoryAlternateKey= 5;
 
 
 select * from DimProduct;
